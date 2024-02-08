@@ -46,7 +46,7 @@ const useLogin = (): Login => {
         (params: any = {}, pathName) =>
             authProvider.login(params).then(ret => {
                 resetNotifications();
-                if (ret && ret.hasOwnProperty('redirectTo')) {
+                if (ret && Object.prototype.hasOwnProperty.call(ret, 'redirectTo')) {
                     if (ret) {
                         navigate(ret.redirectTo);
                     }

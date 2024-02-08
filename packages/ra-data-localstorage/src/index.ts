@@ -132,7 +132,7 @@ export default (params?: LocalStorageDataProviderParams): DataProvider => {
                 .create<RecordType>(resource, params)
                 .then(response => {
                     updateLocalStorage(() => {
-                        if (!data.hasOwnProperty(resource)) {
+                        if (!Object.prototype.hasOwnProperty.call(data, resource)) {
                             data[resource] = [];
                         }
                         data[resource].push(response.data);

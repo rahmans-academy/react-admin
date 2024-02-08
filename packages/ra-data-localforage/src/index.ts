@@ -164,7 +164,7 @@ export default async (
             return baseDataProvider
                 .create<RecordType>(resource, params)
                 .then(response => {
-                    if (!data.hasOwnProperty(resource)) {
+                    if (!Object.prototype.hasOwnProperty.call(data, resource)) {
                         data[resource] = [];
                     }
                     data[resource].push(response.data);
