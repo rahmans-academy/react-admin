@@ -33,7 +33,7 @@ export type Validator = (
 function isValidationErrorMessageWithArgs(
     error: ReturnType<Validator>
 ): error is ValidationErrorMessageWithArgs {
-    return error ? error.hasOwnProperty('message') : false;
+    return error ? Object.prototype.hasOwnProperty.call(error, 'message') : false;
 }
 
 interface MessageFuncParams {

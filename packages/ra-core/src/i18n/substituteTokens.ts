@@ -11,7 +11,7 @@ export const substituteTokens = (template, data) =>
               expression,
               argument
           ) {
-              if (!data.hasOwnProperty(argument) || data[argument] == null) {
+              if (!Object.prototype.hasOwnProperty.call(data, argument) || data[argument] == null) {
                   return expression;
               }
               return data[argument];

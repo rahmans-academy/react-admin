@@ -14,7 +14,7 @@ function validateResponseFormat(
         logger(`The dataProvider returned an empty response for '${type}'.`);
         throw new Error('ra.notification.data_provider_error');
     }
-    if (!response.hasOwnProperty('data')) {
+    if (!Object.prototype.hasOwnProperty.call(response, 'data')) {
         logger(
             `The response to '${type}' must be like { data: ... }, but the received response does not have a 'data' key. The dataProvider is probably wrong for '${type}'.`
         );
@@ -33,7 +33,7 @@ function validateResponseFormat(
         fetchActionsWithArrayOfIdentifiedRecordsResponse.includes(type) &&
         Array.isArray(response.data) &&
         response.data.length > 0 &&
-        !response.data[0].hasOwnProperty('id')
+        !Object.prototype.hasOwnProperty.call(response.data[0], 'id')
     ) {
         logger(
             `The response to '${type}' must be like { data : [{ id: 123, ...}, ...] }, but the received data items do not have an 'id' key. The dataProvider is probably wrong for '${type}'`
@@ -42,7 +42,7 @@ function validateResponseFormat(
     }
     if (
         fetchActionsWithRecordResponse.includes(type) &&
-        !response.data.hasOwnProperty('id')
+        !Object.prototype.hasOwnProperty.call(response.data, 'id')
     ) {
         logger(
             `The response to '${type}' must be like { data: { id: 123, ... } }, but the received data does not have an 'id' key. The dataProvider is probably wrong for '${type}'`
@@ -51,8 +51,8 @@ function validateResponseFormat(
     }
     if (
         fetchActionsWithTotalResponse.includes(type) &&
-        !response.hasOwnProperty('total') &&
-        !response.hasOwnProperty('pageInfo')
+        !Object.prototype.hasOwnProperty.call(response, 'total') &&
+        !Object.prototype.hasOwnProperty.call(response, 'pageInfo')
     ) {
         logger(
             `The response to '${type}' must be like { data: [...], total: 123 } or { data: [...], pageInfo: {...} }, but the received response has neither a 'total' nor a 'pageInfo' key. The dataProvider is probably wrong for '${type}'`
